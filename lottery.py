@@ -56,6 +56,7 @@ def print_gibberish(time_to_run, str_len=50):
 
 # Output the final draft results
 gibberish_time = 1
+print('')
 for i, result in enumerate(reversed(order)):
     if not skip_animation:
         print_gibberish(gibberish_time)
