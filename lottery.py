@@ -48,3 +48,4 @@ for i, result in enumerate(reversed(order)):
     sys.stdout.write('\r')
     sys.stdout.flush()
     print('#%d:\t%s' % (len(order)-i, result))
+    gibberish_time += 1
