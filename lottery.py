@@ -6,10 +6,11 @@ import random
 import numpy as np
 
 input_file = sys.argv[1]
+skip_animation = sys.argv[2] == '--no_anim' if len(sys.argv) > 2 else False
 
 with open(input_file, 'r') as f:
     team_names = [line.strip() for line in f]
-    
+
 LOTTO_BALLS = {
     0: 250,
     1: 199,
@@ -29,11 +30,11 @@ LOTTO_BALLS = {
     15: 3,
 }
 
-# Remove unnecessary lotto slots (we support up to 16)
+# Remove extra lotto spots (we support up to 16)
 for r in range(len(team_names),16):
     del LOTTO_BALLS[r]
 
-# Run the drawing, removing selected teams
+# Run the drawing, removing selected teams once chosen
 order = []
 while LOTTO_BALLS:
     N = float(np.sum(LOTTO_BALLS.values()))
@@ -55,8 +56,9 @@ def print_gibberish(time_to_run, str_len=50):
 # Output the final draft results
 gibberish_time = 1
 for i, result in enumerate(reversed(order)):
-    print_gibberish(gibberish_time)
+    if not skip_animation:
+        print_gibberish(gibberish_time)
     sys.stdout.write('\r')
     sys.stdout.flush()
     print('#%d:\t%s' % (len(order)-i, result))
-    gibberish_time += 0.1
+    gibberish_time += 0.1 # get more dramatic with each result
