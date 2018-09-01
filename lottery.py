@@ -10,6 +10,7 @@ skip_animation = sys.argv[2] == '--no_anim' if len(sys.argv) > 2 else False
 
 with open(input_file, 'r') as f:
     team_names = [line.strip() for line in f]
+    team_names.reverse()
 
 LOTTO_BALLS = {
     0: 250,
